@@ -57,5 +57,8 @@ func (tf *TXTFile) ReadByBlockEx(ctx context.Context, sep func(i int, line strin
 			offset = i
 		}
 	}
+	if err := handler(lines[offset:]); err != nil {
+		return fmt.Errorf("failed to handle block: %w", err)
+	}
 	return nil
 }
