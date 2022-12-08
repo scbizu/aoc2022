@@ -31,6 +31,22 @@ func (tf *TXTFile) ReadByLine(_ context.Context, handler func(line string) error
 	return nil
 }
 
+func (tf *TXTFile) ReadByLineEx(_ context.Context, handler func(i int, line string) error) error {
+	f, err := os.ReadFile(tf.filename)
+	if err != nil {
+		return fmt.Errorf("failed to open file: %w", err)
+	}
+
+	lines := strings.Split(string(f), "\n")
+
+	for index, line := range lines {
+		if err := handler(index, line); err != nil {
+			return fmt.Errorf("failed to handle line: %w", err)
+		}
+	}
+	return nil
+}
+
 func (tf *TXTFile) ReadByBlock(ctx context.Context, separator string, handler func(block []string) error) error {
 	fd, err := os.ReadFile(tf.filename)
 	if err != nil {
