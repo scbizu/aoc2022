@@ -136,9 +136,6 @@ func main() {
 			break
 		}
 	}
-	for i := 0; i < len(m.list); i++ {
-		println(m.list[i].data.String())
-	}
 	println("p1:")
 	for i := 0; i < len(m.list); i++ {
 		fmt.Printf("monkey %d, inspect: %d\n", i, m.list[i].inspectTime)
