@@ -34,18 +34,6 @@ type item struct {
 	data any
 }
 
-func (i *item) print() {
-	if i.t == kindInt {
-		fmt.Printf("%d", i.data.(int))
-		return
-	}
-	fmt.Printf("[")
-	for _, c := range i.children {
-		c.print()
-	}
-	fmt.Printf("]")
-}
-
 func (i *item) String() string {
 	if i.t == kindInt {
 		return fmt.Sprintf("%d", i.data.(int))
@@ -206,11 +194,7 @@ func handler(line []string) error {
 	for index, part := range line {
 		l := strings.Split(part, "\n")
 		im := newItemFromLine(&item{}, l[0])
-		im.print()
-		println()
 		im2 := newItemFromLine(&item{}, l[1])
-		im2.print()
-		println()
 		if im.InRightOrder(im2) == cmpTrue {
 			sum += index + 1
 		}
