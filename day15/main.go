@@ -31,10 +31,8 @@ func main() {
 	ls = grid.Merge(ls)
 	var count int
 	for _, l := range ls {
-		l.Print()
 		count += l.Len()
 	}
-	println("minY:", minY)
 	fmt.Fprintf(os.Stdout, "count: %d\n", count-b.Size())
 
 	input.NewTXTFile("input.txt").ReadByLine(context.Background(), handler2)
