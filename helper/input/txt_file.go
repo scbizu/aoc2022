@@ -24,6 +24,9 @@ func (tf *TXTFile) ReadByLine(_ context.Context, handler func(line string) error
 	lines := strings.Split(string(f), "\n")
 
 	for _, line := range lines {
+		if line == "" {
+			continue
+		}
 		if err := handler(line); err != nil {
 			return fmt.Errorf("failed to handle line: %w", err)
 		}
