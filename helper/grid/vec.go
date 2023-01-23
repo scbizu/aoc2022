@@ -1,6 +1,9 @@
 package grid
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 type Vec struct {
 	X int
@@ -25,4 +28,8 @@ func (v Vec) Sub(v2 Vec) Vec {
 
 func (v Vec) Print() {
 	println(v.X, v.Y)
+}
+
+func (v Vec) String() string {
+	return fmt.Sprintf("(%d,%d)", v.X, v.Y)
 }
