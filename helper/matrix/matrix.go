@@ -114,6 +114,44 @@ func (m Matrix[T]) GetNeighbor(x, y int) []grid.Vec {
 	return ns
 }
 
+func (m Matrix[T]) Reset(c T) {
+	for i := 0; i < m.Rows(); i++ {
+		for j := 0; j < m.Cols(); j++ {
+			// set the default value of matrix
+			m[i][j] = c
+		}
+	}
+}
+
+func (m Matrix[T]) GetNeighbors8(x, y int) []grid.Vec {
+	var ns []grid.Vec
+	if x > 0 {
+		ns = append(ns, grid.Vec{X: x - 1, Y: y})
+	}
+	if x < m.Rows()-1 {
+		ns = append(ns, grid.Vec{X: x + 1, Y: y})
+	}
+	if y > 0 {
+		ns = append(ns, grid.Vec{X: x, Y: y - 1})
+	}
+	if y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: x, Y: y + 1})
+	}
+	if x > 0 && y > 0 {
+		ns = append(ns, grid.Vec{X: x - 1, Y: y - 1})
+	}
+	if x < m.Rows()-1 && y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: x + 1, Y: y + 1})
+	}
+	if x > 0 && y < m.Cols()-1 {
+		ns = append(ns, grid.Vec{X: x - 1, Y: y + 1})
+	}
+	if x < m.Rows()-1 && y > 0 {
+		ns = append(ns, grid.Vec{X: x + 1, Y: y - 1})
+	}
+	return ns
+}
+
 func (m Matrix[T]) Print() {
 	for i := 0; i < m.Rows(); i++ {
 		for j := 0; j < m.Cols(); j++ {
