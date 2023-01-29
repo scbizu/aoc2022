@@ -160,3 +160,12 @@ func (m Matrix[T]) Print() {
 		fmt.Println()
 	}
 }
+
+func (m Matrix[T]) PrintEx(format string) {
+	for i := 0; i < m.Rows(); i++ {
+		for j := 0; j < m.Cols(); j++ {
+			fmt.Printf(format, m.Get(i, j))
+		}
+		fmt.Println()
+	}
+}

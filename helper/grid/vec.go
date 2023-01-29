@@ -1,9 +1,10 @@
 package grid
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"math"
-	"os"
 	"sort"
 )
 
@@ -86,7 +87,13 @@ func (m VecMatrix[T]) ForEach(f func(Vec, T)) {
 	}
 }
 
-func (m VecMatrix[T]) Print(format string) {
+func (m VecMatrix[T]) String(format string) string {
+	buffer := bytes.NewBuffer(nil)
+	m.Print(buffer, format)
+	return buffer.String()
+}
+
+func (m VecMatrix[T]) Print(w io.Writer, format string) {
 	byline := make(map[int][]Vec)
 	for v := range m {
 		byline[v.Y] = append(byline[v.Y], v)
@@ -106,9 +113,9 @@ func (m VecMatrix[T]) Print(format string) {
 
 	for _, line := range lines {
 		for _, v := range line {
-			fmt.Fprintf(os.Stdout, format, m[v])
+			fmt.Fprintf(w, format, m[v])
 		}
-		println()
+		fmt.Fprintln(w)
 	}
 }
 

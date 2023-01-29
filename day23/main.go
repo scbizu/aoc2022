@@ -46,7 +46,7 @@ func main() {
 	for g, e := range board {
 		m.Add(g, e)
 	}
-	m.Print("%c")
+	m.Print(os.Stdout, "%c")
 	elfs := make(map[grid.Vec]*elf)
 	elfLoc.Each(func(item grid.Vec) bool {
 		elfs[item] = &elf{
@@ -81,7 +81,7 @@ func main() {
 	for g, e := range board {
 		m.Add(g, e)
 	}
-	m.Print("%c")
+	m.Print(os.Stdout, "%c")
 	elfs = make(map[grid.Vec]*elf)
 
 	elfLoc.Each(func(item grid.Vec) bool {
